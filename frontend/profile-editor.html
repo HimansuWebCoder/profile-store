@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+    <div id="profile-container">
+    	Profile-Image:-<input id="profile-image" type="img" name="profile-image"/><br><br>
+    	Profile-Header:-<input id="profile-header-name" type="text" name="profile-name" /><br><br>
+    	Profile-Content:-<input id="profile-header-content" type="text" name="profile-content" /><br>
+    	<button id="update-profile-btn" type="submit">Submit</button>
+    	<button id="delete-profile-btn">Delete</button>
+    </div>
+    <script>
+        const updateProfileBtn = document.querySelector("#update-profile-btn");
+        const delProfileBtn = document.querySelector("#delete-profile-btn");
+        const profileHeaderInput = document.querySelector("#profile-header-name");
+        const profileHeaderContent = document.querySelector("#profile-header-content");
+        const profileImageInput = document.querySelector("#profile-image");
+
+        updateProfileBtn.addEventListener("click", () => {
+        	if (profileHeaderInput.value !== "" && profileHeaderContent.value !== "") {
+        	fetch("http://localhost:3000/profile-editor", {
+        		method: "put",
+        		headers: {"Content-Type" : "application/json"},
+        		body: JSON.stringify({id: "1", name:profileHeaderInput.value, passion:profileHeaderContent.value, image: profileImageInput.value })
+        	})
+        	}
+        	window.location = "http://localhost:3000"
+        })
+
+        // delProfileBtn.addEventListener("click", () => {
+        // 	fetch("http://localhost:3000/profile-editor", {
+        // 		method: "delete"
+        // 	})
+        // 	// window.location = "http://localhost:3000"
+        // })
+
+    </script>
+</body>
+</html>

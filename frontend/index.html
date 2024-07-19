@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>profile-view</title>
+    <style>
+        body {
+            background-color: rgba(123, 233, 44, 0.7);
+        }
+        #profile-container {
+            max-width:300px;
+            height:auto;
+            background-color: grey;
+            color: white;
+            text-align:center;
+            margin: auto;
+            padding: 10px;
+            border-radius: 5%;
+            word-break: break-word;
+        }
+
+        #profile-image {
+            max-width: 100%;
+            height: 150px;
+            border-radius: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div id="profile-container">
+         <img src="" alt="image" id="profile-image" />
+         <h1 id="name"></h1>
+         <h2 id="passion">I am a Programmer</h2>
+         <div id="crud-container">
+             <button id="create-profile">Create</button>
+             <button id="edit-profile">Edit</button>
+             <button id="delete-profile">Delete</button>
+         </div>
+    </div>
+    <script>
+        const profileImg = document.querySelector("#profile-image");
+        const profileHeaderName = document.querySelector("#name");
+        const profileHeaderPassion = document.querySelector("#passion");
+    	const createProfile = document.querySelector("#create-profile");
+        const editProfile = document.querySelector("#edit-profile");
+        const delProfile = document.querySelector("#delete-profile");
+     
+        fetch("http://localhost:3000/profile")
+        .then(res => res.json())
+        .then(users => {
+            users.forEach(user => {
+                profileHeaderName.textContent = user.name;
+                profileHeaderPassion.textContent = user.passion
+                profileImg.src = user.image;
+                console.log(user);
+            })
+        })
+
+        // createProfile.addEventListener("click", () => {
+        //     window.location = "profile-editor";
+        // })
+
+        editProfile.addEventListener("click", () => {
+            window.location = "profile-editor";
+        })
+
+        // delProfile.addEventListener("click", () => {
+        //     window.location = "profile-editor";
+        // })
+
+    </script>
+</body>
+</html>
